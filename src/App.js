@@ -1,11 +1,12 @@
 import 'whatwg-fetch';
 import React, {Component} from 'react';
 import axios from "axios";
-import {Table} from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css'
+import './App.css'
 
 
-const PUBLIC_KEY = 'AIzaSyBnNAISIUKe6xdhq1_rjor2rxoI3UlMY7k';
-const CALENDAR_ID = 'f7jnetm22dsjc3npc2lu3buvu4@group.calendar.google.com';
+const PUBLIC_KEY = 'AIzaSyAiVM8SUdzANblCt9J8WQex43ot70kUnvg';
+const CALENDAR_ID = 'avazbek.dev@gmail.com';
 const dataUrl = 'https://www.googleapis.com/calendar/v3/calendars/';
 
 class App extends Component {
@@ -55,17 +56,16 @@ class App extends Component {
       return (
           <tr key={this.jsonItem.id}>
             <th scope="row">{i + 1}</th>
-            <td>{this.jsonItem.start.dateTime}</td>
-            <td>{this.jsonItem.start.timeZone}</td>
-            <td>{this.jsonItem.end.dateTime}</td>
+            <td>{this.jsonItem.start.dateTime.substring(0,10)}</td>
+            <td>{this.jsonItem.start.dateTime.substring(11,16)}</td>
+            <td>{this.jsonItem.end.dateTime.substring(11,16)}</td>
             <td>{this.jsonItem.end.timeZone}</td>
             <td>{this.jsonItem.eventType}</td>
             <td>{this.jsonItem.creator.email}</td>
-            <td>{this.jsonItem.creator.displayName}</td>
             <td>{this.jsonItem.status}</td>
-            <td>{this.jsonItem.created}</td>
-            <td>{this.jsonItem.updated}</td>
-            <td><a href={items[1].htmlLink}>link</a></td>
+            <td>{this.jsonItem.created.substring(0,10)}</td>
+            <td>{this.jsonItem.updated.substring(0,10)}</td>
+            <td><a href={this.jsonItem.htmlLink}>link</a></td>
           </tr>
       )
     })
@@ -76,7 +76,7 @@ class App extends Component {
     return (
         <React.Fragment>
           <div>
-            <div className={'container'}>
+            <div className={'container-md '}>
               <div className="text-center">
                 <h1>G-Calendar</h1>
               </div>
@@ -84,28 +84,27 @@ class App extends Component {
                 <div className="col-12">
                   <h2>Events Table</h2>
                 </div>
-                <div className={'row'}>
-                  <Table className={'table-border'}>
+                <div className={'row  table-container border'}>
+                  <table className={'table table-striped '}>
                     <thead>
                     <tr>
                       <th>#</th>
-                      <th>start.dateTime</th>
-                      <th>start.timeZone</th>
-                      <th>end.dateTime</th>
-                      <th>end.timeZone</th>
-                      <th>eventType</th>
-                      <th>creator.email</th>
-                      <th>creator.displayName</th>
-                      <th>status</th>
-                      <th>created</th>
-                      <th>updated</th>
-                      <th>htmlLink</th>
+                      <th scope="col"  >Event-Day</th>
+                      <th scope="col" >Start Time</th>
+                      <th scope="col" >End Time</th>
+                      <th scope="col" >Time Zone</th>
+                      <th scope="col" >Event Type</th>
+                      <th scope="col" >Creator's email</th>
+                      <th scope="col" >Status</th>
+                      <th scope="col" >Created At</th>
+                      <th scope="col" >Updated At</th>
+                      <th scope="col" >Link </th>
                     </tr>
                     </thead>
                     <tbody>
                     {this.createRow(this.state.items)}
                     </tbody>
-                  </Table>
+                  </table>
                 </div>
               </div>
             </div>
